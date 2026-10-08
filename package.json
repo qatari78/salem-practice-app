@@ -4,9 +4,19 @@
   "private": true,
   "description": "Salem AI practice app: the permanent proving ground for the app-building setup.",
   "type": "module",
-  "engines": { "node": ">=24" },
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "start": "node server.js",
-    "test": "node --test"
+    "test": "node --test 'test/**/*.test.js'"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.63.0",
+    "@types/node": "24.19.1",
+    "eslint": "10.12.0",
+    "globals": "17.13.0",
+    "typescript": "7.0.2"
   }
 }

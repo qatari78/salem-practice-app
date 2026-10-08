@@ -1,0 +1,53 @@
+# The automatic checks: the official verdict on every pushed commit (plan v1.2 §5).
+# Lives under .github/workflows/, which builder keys cannot change (no Workflows permission).
+# Changing a check needs the Lead's sign-off and the other lab's review; loosening one needs Salem's yes.
+name: checks
+on:
+  push:
+  pull_request:
+concurrency:
+  group: checks-${{ github.sha }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  code:
+    name: lint, types, unit, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: lint
+        run: npx eslint --config .github/workflows/checks/eslint.config.js .
+      - name: types
+        run: npx tsc --project .github/workflows/checks/tsconfig.json
+      - name: unit tests
+        run: node --test 'test/**/*.test.js'
+      - name: build
+        run: node .github/workflows/checks/build-check.mjs
+  browser:
+    name: playwright
+    needs: code
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: browser tests
+        run: npx playwright test --config .github/workflows/checks/playwright.config.js
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
