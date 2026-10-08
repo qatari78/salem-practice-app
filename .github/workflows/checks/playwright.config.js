@@ -11,5 +11,5 @@ export default defineConfig({
     { name: 'phone', use: { ...devices['Pixel 7'] } },
     { name: 'desktop', use: { ...devices['Desktop Chrome'] } },
   ],
-  webServer: { command: 'node server.js', url: 'http://127.0.0.1:4173/health', env: { PORT: '4173' }, timeout: 30000 },
+  webServer: { command: 'node server.js', cwd: '../../..', url: 'http://127.0.0.1:4173/health', env: { PORT: '4173' }, timeout: 30000 },
 });
