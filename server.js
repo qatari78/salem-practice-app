@@ -19,13 +19,21 @@ export const server = createServer(async (req, res) => {
     return;
   }
   if (req.url === '/health') {
-    res.writeHead(200, { 'content-type': 'application/json' });
-    res.end(JSON.stringify({ ok: true, env }));
+    const body = JSON.stringify({ ok: true, env });
+    res.writeHead(200, {
+      'content-type': 'application/json',
+      'content-length': Buffer.byteLength(body),
+    });
+    res.end(body);
     return;
   }
   if (req.url === '/version') {
-    res.writeHead(200, { 'content-type': 'application/json' });
-    res.end(JSON.stringify({ version: pkg.version, commit, env }));
+    const body = JSON.stringify({ version: pkg.version, commit, env });
+    res.writeHead(200, {
+      'content-type': 'application/json',
+      'content-length': Buffer.byteLength(body),
+    });
+    res.end(body);
     return;
   }
   if (req.url === '/robots.txt') {
@@ -43,8 +51,24 @@ export const server = createServer(async (req, res) => {
   if (!featureTotalTaps) {
     html = html.replace('  <small id="total" data-testid="total">Total taps: 0</small>\n', '');
   }
-  res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
-  res.end(html.replace('{{ENV}}', env));
+  const body = html.replace('{{ENV}}', env);
+  res.writeHead(200, {
+    'content-type': 'text/html; charset=utf-8',
+    'content-length': Buffer.byteLength(body),
+  });
+  res.end(body);
+});
+
+server.on('connect', (_req, socket) => {
+  const body = 'Method not allowed';
+  socket.end(
+    'HTTP/1.1 405 Method Not Allowed\r\n' +
+    'Allow: GET, HEAD\r\n' +
+    'content-type: text/plain; charset=utf-8\r\n' +
+    `content-length: ${Buffer.byteLength(body)}\r\n` +
+    'connection: close\r\n\r\n' +
+    body,
+  );
 });
 
 if (process.argv[1] === new URL(import.meta.url).pathname) {
