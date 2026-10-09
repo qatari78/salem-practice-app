@@ -1,0 +1,165 @@
+commit 4825cc22b1b7e1ccad0dc68be74b6d70633a455c
+Author:     Salem AI builder <builder@salem-ai.invalid>
+AuthorDate: Fri Oct 9 07:49:02 2026 +0000
+Commit:     Salem AI builder <builder@salem-ai.invalid>
+CommitDate: Fri Oct 9 07:49:02 2026 +0000
+
+    card s7-flag: add startup switch for total taps
+---
+ e2e/flag.spec.js  | 62 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ public/index.html |  4 +++-
+ server.js         |  6 +++++-
+ test/flag.test.js | 36 ++++++++++++++++++++++++++++++++
+ 4 files changed, 106 insertions(+), 2 deletions(-)
+
+diff --git a/e2e/flag.spec.js b/e2e/flag.spec.js
+new file mode 100644
+index 0000000..630a212
+--- /dev/null
++++ b/e2e/flag.spec.js
+@@ -0,0 +1,62 @@
++import { test, expect } from '@playwright/test';
++import { spawn } from 'node:child_process';
++import { once } from 'node:events';
++import { createServer } from 'node:net';
++
++/** @type {import('node:child_process').ChildProcess | undefined} */
++let app;
++let offServerURL = '';
++
++test.beforeAll(async () => {
++  const portServer = createServer();
++  await new Promise((resolve) => portServer.listen(0, '127.0.0.1', () => resolve(undefined)));
++  const address = portServer.address();
++  if (!address || typeof address === 'string') throw new Error('Could not allocate a free port');
++  const port = address.port;
++  await new Promise((resolve, reject) => {
++    portServer.close((error) => error ? reject(error) : resolve(undefined));
++  });
++
++  offServerURL = `http://127.0.0.1:${port}`;
++  app = spawn(process.execPath, ['server.js'], {
++    cwd: new URL('../', import.meta.url),
++    env: { ...process.env, FEATURE_TOTAL_TAPS: 'off', PORT: String(port) },
++    stdio: 'inherit',
++  });
++  await once(app, 'spawn');
++  await expect.poll(async () => {
++    try {
++      const response = await fetch(`${offServerURL}/health`);
++      return response.ok && (await response.json()).ok === true;
++    } catch {
++      return false;
++    }
++  }).toBe(true);
++});
++
++test.afterAll(async () => {
++  if (app && app.exitCode === null && app.signalCode === null) {
++    const exited = once(app, 'exit');
++    app.kill();
++    await exited;
++  }
++});
++
++test('with total taps off, the line is absent and Add and Reset work without errors', async ({ page }) => {
++  /** @type {string[]} */
++  const errors = [];
++  page.on('pageerror', (error) => errors.push(error.message));
++  await page.goto(offServerURL);
++  await expect(page.getByTestId('total')).toHaveCount(0);
++  await expect(page.getByText('Total taps:')).toHaveCount(0);
++  await expect(page.getByTestId('count')).toHaveText('0');
++  await page.getByTestId('add').click();
++  await page.getByTestId('add').click();
++  await expect(page.getByTestId('count')).toHaveText('2');
++  await page.getByTestId('reset').click();
++  await expect(page.getByTestId('count')).toHaveText('0');
++  await page.getByTestId('add').click();
++  await expect(page.getByTestId('count')).toHaveText('1');
++  await expect(page.getByTestId('total')).toHaveCount(0);
++  expect(errors).toEqual([]);
++});
+diff --git a/public/index.html b/public/index.html
+index b6648ad..5620dc2 100644
+--- a/public/index.html
++++ b/public/index.html
+@@ -26,9 +26,11 @@
+ <script>
+   let n = 0;
+   let total = 0;
++  const totalElement = document.getElementById('total');
+   document.getElementById('add').addEventListener('click', () => {
+     document.getElementById('count').textContent = String(++n);
+-    document.getElementById('total').textContent = `Total taps: ${++total}`;
++    total++;
++    if (totalElement) totalElement.textContent = `Total taps: ${total}`;
+   });
+   document.getElementById('reset').addEventListener('click', () => {
+     n = 0;
+diff --git a/server.js b/server.js
+index c5a6810..9c24ed2 100644
+--- a/server.js
++++ b/server.js
+@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
+ 
+ const port = Number(process.env.PORT) || 3000;
+ const env = process.env.RAILWAY_ENVIRONMENT_NAME || 'local';
++const featureTotalTaps = process.env.FEATURE_TOTAL_TAPS !== 'off';
+ /** @type {{ version: string }} */
+ const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8'));
+ const commit = process.env.RAILWAY_GIT_COMMIT_SHA?.slice(0, 7) || 'local';
+@@ -24,7 +25,10 @@ export const server = createServer(async (req, res) => {
+     res.end('User-agent: *\nDisallow: /\n');
+     return;
+   }
+-  const html = await readFile(new URL('./public/index.html', import.meta.url), 'utf8');
++  let html = await readFile(new URL('./public/index.html', import.meta.url), 'utf8');
++  if (!featureTotalTaps) {
++    html = html.replace('  <small id="total" data-testid="total">Total taps: 0</small>\n', '');
++  }
+   res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
+   res.end(html.replace('{{ENV}}', env));
+ });
+diff --git a/test/flag.test.js b/test/flag.test.js
+new file mode 100644
+index 0000000..cd67c18
+--- /dev/null
++++ b/test/flag.test.js
+@@ -0,0 +1,36 @@
++import { test } from 'node:test';
++import assert from 'node:assert/strict';
++
++for (const value of [undefined, 'on', '', 'OFF', 'false', '0', ' off', 'off ', 'off']) {
++  test(`total taps switch at startup: ${JSON.stringify(value) ?? 'unset'}`, async (t) => {
++    const previous = process.env.FEATURE_TOTAL_TAPS;
++    t.after(() => {
++      if (previous === undefined) delete process.env.FEATURE_TOTAL_TAPS;
++      else process.env.FEATURE_TOTAL_TAPS = previous;
++    });
++    if (value === undefined) delete process.env.FEATURE_TOTAL_TAPS;
++    else process.env.FEATURE_TOTAL_TAPS = value;
++
++    // A unique module URL gives each case its own startup and server instance.
++    const url = new URL('../server.js', import.meta.url);
++    url.searchParams.set('flag', JSON.stringify(value) ?? 'unset');
++    /** @type {typeof import('../server.js')} */
++    const { server } = await import(url.href);
++    // Changing the environment after startup must not change the served page.
++    process.env.FEATURE_TOTAL_TAPS = value === 'off' ? 'on' : 'off';
++    await new Promise((resolve) => server.listen(0, () => resolve(undefined)));
++    t.after(() => new Promise((resolve, reject) => {
++      server.close((error) => error ? reject(error) : resolve(undefined));
++    }));
++    const address = server.address();
++    assert.ok(address && typeof address === 'object');
++    const response = await fetch(`http://127.0.0.1:${address.port}/`);
++    assert.equal(response.status, 200);
++    const html = await response.text();
++    if (value === 'off') {
++      assert.doesNotMatch(html, /<[^>]+(?:id|data-testid)="total"/);
++    } else {
++      assert.match(html, /<small id="total" data-testid="total">Total taps: 0<\/small>/);
++    }
++  });
++}

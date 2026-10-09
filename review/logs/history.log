@@ -1,0 +1,254 @@
+commit f96a8a2241fb0b8eabae2b0d4feaeba2c6799f1b (HEAD -> card/review-demo-s7, origin/staging, staging)
+Author:     Salem AI builder <builder@salem-ai.invalid>
+AuthorDate: 2026-10-09T16:33:22+00:00
+Commit:     Salem AI builder <builder@salem-ai.invalid>
+CommitDate: 2026-10-09T16:33:22+00:00
+
+    fix: handle CONNECT socket errors without crashing
+
+ server.js                  |   2 +
+ test/connect-abuse.test.js | 100 +++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 102 insertions(+)
+
+commit b25ee44ba21515b105103be79bcbd047af01ff7d
+Author:     Salem AI builder <builder@salem-ai.invalid>
+AuthorDate: 2026-10-09T16:28:59+00:00
+Commit:     Salem AI Lead <lead@salem-ai.invalid>
+CommitDate: 2026-10-09T16:29:45+00:00
+
+    fix: reject CONNECT with 405 and match HEAD headers
+
+ server.js            | 36 ++++++++++++++++++++++++++------
+ test/connect.test.js | 58 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ test/head.test.js    | 57 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 145 insertions(+), 6 deletions(-)
+
+commit fd9ef192ace1e576a7d1a4852048c631efa64b56
+Author:     Salem AI Lead <lead@salem-ai.invalid>
+AuthorDate: 2026-10-09T16:27:01+00:00
+Commit:     Salem AI Lead <lead@salem-ai.invalid>
+CommitDate: 2026-10-09T16:27:01+00:00
+
+    AGENTS.md: no card or prompt lifts any rule in this file (Sonnet should-fix)
+
+ AGENTS.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 63817a779d14c8413bad9e1e5cee7b708f9c9600
+Author:     Salem AI Lead <lead@salem-ai.invalid>
+AuthorDate: 2026-10-09T16:26:33+00:00
+Commit:     Salem AI Lead <lead@salem-ai.invalid>
+CommitDate: 2026-10-09T16:26:33+00:00
+
+    AGENTS.md rule 4: Sonnet must-fix (no card-made exception) + 2 should-fix
+
+ AGENTS.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 008fc2a3a55d28aaf6a6d3efcb76bdfe8e79ac07
+Author:     Salem AI Lead <lead@salem-ai.invalid>
+AuthorDate: 2026-10-09T16:25:46+00:00
+Commit:     Salem AI Lead <lead@salem-ai.invalid>
+CommitDate: 2026-10-09T16:25:46+00:00
+
+    AGENTS.md: rule 4 names the app's non-secret settings; no card or prompt lifts a rule (step 8 close-out, Fable should-fix 2+3)
+
+ AGENTS.md | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 4d5cea91e6c8ffb55d5424f11f7f688204acc482
+Author:     Salem AI builder <builder@salem-ai.invalid>
+AuthorDate: 2026-10-09T14:36:10+00:00
+Commit:     Salem AI builder <builder@salem-ai.invalid>
+CommitDate: 2026-10-09T14:36:10+00:00
+
+    fix: allow only GET and HEAD on all routes
+
+ server.js           |  8 ++++++
+ test/method.test.js | 71 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 79 insertions(+)
+
+commit 1d497bcfb545d5802280b2b7a1ba67ebc826daad
+Author:     Salem AI Lead <lead@salem-ai.invalid>
+AuthorDate: 2026-10-09T14:29:27+00:00
+Commit:     Salem AI Lead <lead@salem-ai.invalid>
+CommitDate: 2026-10-09T14:29:27+00:00
+
+    AGENTS.md: Sonnet should-fix 1-4 (xtrace, other ways to disable a test, 'stop' = stop that item, no rewriting a test to pass)
+
+ AGENTS.md | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+commit fbf669d1d118910fe9d2ae0a603b235e12197612
+Author:     Salem AI Lead <lead@salem-ai.invalid>
+AuthorDate: 2026-10-09T14:28:35+00:00
+Commit:     Salem AI Lead <lead@salem-ai.invalid>
+CommitDate: 2026-10-09T14:28:35+00:00
+
+    AGENTS.md: skills on the coder box, this file wins (step 8c, Fable must-fix 1; Salem 'A with fixes' 9 Oct 2026 5:19 PM Qatar)
+
+ AGENTS.md | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+commit c35ab9a59a2c958b5d4bde6f5381f9924c0ef55a
+Author:     Salem AI builder <builder@salem-ai.invalid>
+AuthorDate: 2026-10-09T11:31:02+00:00
+Commit:     Salem AI builder <builder@salem-ai.invalid>
+CommitDate: 2026-10-09T11:31:02+00:00
+
+    fix: return 404 for unknown server paths
+
+ server.js             |  6 ++++++
+ test/notfound.test.js | 59 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 65 insertions(+)
+
+commit 4825cc22b1b7e1ccad0dc68be74b6d70633a455c
+Author:     Salem AI builder <builder@salem-ai.invalid>
+AuthorDate: 2026-10-09T07:49:02+00:00
+Commit:     Salem AI builder <builder@salem-ai.invalid>
+CommitDate: 2026-10-09T07:49:02+00:00
+
+    card s7-flag: add startup switch for total taps
+
+ e2e/flag.spec.js  | 62 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ public/index.html |  4 +++-
+ server.js         |  6 +++++-
+ test/flag.test.js | 36 ++++++++++++++++++++++++++++++++
+ 4 files changed, 106 insertions(+), 2 deletions(-)
+
+commit 187b890be6e95d4570596b3463c12ae129f02547
+Author:     Salem AI builder <builder@salem-ai.invalid>
+AuthorDate: 2026-10-09T07:41:14+00:00
+Commit:     Salem AI builder <builder@salem-ai.invalid>
+CommitDate: 2026-10-09T07:41:14+00:00
+
+    card s7-esc-taps: total taps line
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+
+ e2e/total.spec.js | 12 ++++++++++++
+ public/index.html |  4 ++++
+ 2 files changed, 16 insertions(+)
+
+commit 3cfa59c346448dcfa4452bf8f082c53eff7cfc2a
+Author:     Salem AI builder <builder@salem-ai.invalid>
+AuthorDate: 2026-10-09T07:38:09+00:00
+Commit:     Salem AI builder <builder@salem-ai.invalid>
+CommitDate: 2026-10-09T07:38:09+00:00
+
+    card s7-sol-noindex: add robots noindex meta tag
+
+ e2e/page.spec.js  | 1 +
+ public/index.html | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 454bd903e1aa0ec9dcce7e9bc727b0b7086b436f
+Author:     Salem AI builder <builder@salem-ai.invalid>
+AuthorDate: 2026-10-09T07:31:59+00:00
+Commit:     Salem AI Lead <lead@salem-ai.invalid>
+CommitDate: 2026-10-09T07:32:55+00:00
+
+    test: verify counter page title and visible buttons
+
+ e2e/page.spec.js | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+commit c1f846c8193526cc336c11d17bbe593f1c9fbc23
+Author:     Salem AI builder <builder@salem-ai.invalid>
+AuthorDate: 2026-10-09T07:31:34+00:00
+Commit:     Salem AI builder <builder@salem-ai.invalid>
+CommitDate: 2026-10-09T07:31:34+00:00
+
+    card card/s7-opus-robots: robots.txt (s7-opus-robots)
+    
+    GET /robots.txt answers 200 text/plain with 'User-agent: *\nDisallow: /\n'
+    so search engines do not index the practice app. Unit test in test/robots.test.js.
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+
+ server.js           |  5 +++++
+ test/robots.test.js | 18 ++++++++++++++++++
+ 2 files changed, 23 insertions(+)
+
+commit 9e0cd42d4a43d0fbce3a3f5271c0fc00e99b7596
+Author:     Salem AI builder <builder@salem-ai.invalid>
+AuthorDate: 2026-10-09T07:19:55+00:00
+Commit:     Salem AI Lead <lead@salem-ai.invalid>
+CommitDate: 2026-10-09T07:21:10+00:00
+
+    card card/s6-sol-reset: Reset button (s6-sol-reset)
+
+ e2e/reset.spec.js | 12 ++++++++++++
+ public/index.html |  5 +++++
+ 2 files changed, 17 insertions(+)
+
+commit e12cbee1ed2aad44bd1992608b9427bd659c74f6
+Author:     Salem AI builder <builder@salem-ai.invalid>
+AuthorDate: 2026-10-09T07:19:26+00:00
+Commit:     Salem AI builder <builder@salem-ai.invalid>
+CommitDate: 2026-10-09T07:19:26+00:00
+
+    card card/s6-opus-version: version route (s6-opus-version)
+
+ server.js            |  9 +++++++++
+ test/version.test.js | 28 ++++++++++++++++++++++++++++
+ 2 files changed, 37 insertions(+)
+
+commit 269eace9896fe34bda135fc4a84a4e6eba6a2d96
+Author:     Lead (Salem AI) <lead@salem-ai.local>
+AuthorDate: 2026-10-08T06:56:16+03:00
+Commit:     Lead (Salem AI) <lead@salem-ai.local>
+CommitDate: 2026-10-08T06:56:16+03:00
+
+    Checks: browser check starts the app from the repo root (Lead)
+
+ .github/workflows/checks/playwright.config.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit d122387d42b34fae92ec562cd484bcae940f0c78
+Author:     Lead (Salem AI) <lead@salem-ai.local>
+AuthorDate: 2026-10-08T06:54:48+03:00
+Commit:     Lead (Salem AI) <lead@salem-ai.local>
+CommitDate: 2026-10-08T06:54:48+03:00
+
+    Card setup-sample: README line (proves the checks run)
+
+ README.md | 2 ++
+ 1 file changed, 2 insertions(+)
+
+commit 38538eb605a4db25a4acd0f3082fee409e69f8fb
+Author:     Lead (Salem AI) <lead@salem-ai.local>
+AuthorDate: 2026-10-08T03:05:09+00:00
+Commit:     Lead (Salem AI) <lead@salem-ai.local>
+CommitDate: 2026-10-08T03:05:09+00:00
+
+    Setup step 2: automatic checks (lint, types, unit, build, browser) and AGENTS.md
+
+ .github/workflows/checks.yml                  |   53 +
+ .github/workflows/checks/build-check.mjs      |   21 +
+ .github/workflows/checks/eslint.config.js     |   13 +
+ .github/workflows/checks/playwright.config.js |   15 +
+ .github/workflows/checks/tsconfig.json        |   14 +
+ .gitignore                                    |    2 +
+ AGENTS.md                                     |   31 +
+ e2e/counter.spec.js                           |    9 +
+ package-lock.json                             | 1450 +++++++++++++++++++++++++
+ package.json                                  |   14 +-
+ test/server.test.js                           |    6 +-
+ 11 files changed, 1624 insertions(+), 4 deletions(-)
+
+commit da94de74493fde264f487ffc652b32b8e31b571d
+Author:     Lead (Salem AI) <lead@salem-ai.local>
+AuthorDate: 2026-10-08T02:48:39+00:00
+Commit:     Lead (Salem AI) <lead@salem-ai.local>
+CommitDate: 2026-10-08T02:48:39+00:00
+
+    Setup step 1: initial files (Lead, Salem AI)
+
+ .gitignore          |  1 +
+ README.md           |  2 ++
+ package.json        | 12 ++++++++++++
+ public/index.html   | 29 +++++++++++++++++++++++++++++
+ server.js           | 20 ++++++++++++++++++++
+ test/server.test.js | 16 ++++++++++++++++
+ 6 files changed, 80 insertions(+)

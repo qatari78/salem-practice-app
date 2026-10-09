@@ -1,0 +1,7 @@
+
+> salem-practice-app@0.1.0 start
+> node server.js
+
+practice app on 4174 (local)
+build check: app starts and /health answers
+EXIT_CODE=0

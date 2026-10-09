@@ -1,0 +1,63 @@
+✔ reset after CONNECT leaves the server answering GET /health (143.309391ms)
+✔ CONNECT with a request body gets a full 405 and leaves the server healthy (67.342798ms)
+✔ CONNECT with pipelined data gets a full 405 and leaves the server healthy (76.445227ms)
+▶ CONNECT rejects every target with a complete 405 and closes the socket
+  ✔ CONNECT example.com:443 (4.657277ms)
+  ✔ CONNECT / (2.417272ms)
+✔ CONNECT rejects every target with a complete 405 and closes the socket (10.893262ms)
+✔ total taps switch at startup: unset (39.809624ms)
+✔ total taps switch at startup: "on" (6.526808ms)
+✔ total taps switch at startup: "" (3.823782ms)
+✔ total taps switch at startup: "OFF" (4.378442ms)
+✔ total taps switch at startup: "false" (3.278929ms)
+✔ total taps switch at startup: "0" (3.035943ms)
+✔ total taps switch at startup: " off" (2.958765ms)
+✔ total taps switch at startup: "off " (2.840246ms)
+✔ total taps switch at startup: "off" (5.989167ms)
+▶ HEAD has every GET header and status with no bytes in the body
+  ✔ HEAD / matches GET (11.140648ms)
+  ✔ HEAD /health matches GET (2.606319ms)
+  ✔ HEAD /version matches GET (1.620895ms)
+✔ HEAD has every GET header and status with no bytes in the body (18.72013ms)
+▶ only GET and HEAD are allowed on every path
+  ✔ POST / returns 405 (20.01114ms)
+  ✔ PUT /health returns 405 (3.85491ms)
+  ✔ DELETE /version returns 405 (2.022838ms)
+  ✔ POST /nope returns 405 (1.93348ms)
+  ✔ OPTIONS /robots.txt returns 405 (1.678893ms)
+  ✔ PATCH /index.html?x=1 returns 405 (1.371348ms)
+  ✔ GET / is unchanged (3.333018ms)
+  ✔ HEAD / keeps the GET status and response headers without a body (3.495336ms)
+  ✔ GET /health is unchanged (2.489161ms)
+  ✔ HEAD /health keeps the GET status and response headers without a body (2.034249ms)
+  ✔ GET /version is unchanged (1.202672ms)
+  ✔ HEAD /version keeps the GET status and response headers without a body (1.489546ms)
+  ✔ GET /robots.txt is unchanged (0.977294ms)
+  ✔ HEAD /robots.txt keeps the GET status and response headers without a body (1.2982ms)
+  ✔ GET /nope is unchanged (1.043105ms)
+  ✔ HEAD /nope keeps the GET status and response headers without a body (1.497276ms)
+✔ only GET and HEAD are allowed on every path (57.787045ms)
+▶ serves known routes and returns plain-text 404 for unknown paths
+  ✔ / returns the counter page (16.983436ms)
+  ✔ /index.html returns the counter page (4.400352ms)
+  ✔ /?x=1 returns the counter page (2.363774ms)
+  ✔ /health is unchanged (2.259466ms)
+  ✔ /version is unchanged (1.783142ms)
+  ✔ /robots.txt is unchanged (2.000929ms)
+  ✔ /nope returns Not found (3.650513ms)
+  ✔ /a/b returns Not found (1.858811ms)
+  ✔ /nope?x=1 returns Not found (2.313975ms)
+  ✔ /index.html/ returns Not found (2.01038ms)
+✔ serves known routes and returns plain-text 404 for unknown paths (46.575049ms)
+✔ robots.txt tells search engines not to index (53.933826ms)
+✔ serves the counter page and health (23.847021ms)
+✔ serves the running version (44.442741ms)
+ℹ tests 50
+ℹ suites 0
+ℹ pass 50
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 471.491022
+EXIT_CODE=0

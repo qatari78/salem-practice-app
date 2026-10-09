@@ -1,0 +1,44 @@
+[WebServer] (node:747) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 10 tests using 10 workers
+
+(node:755) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:764) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:795) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:775) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:756) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:770) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:762) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:789) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:783) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:802) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:852) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+practice app on 35701 (local)
+(node:884) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+practice app on 34879 (local)
+  ✓   6 [desktop] › e2e/page.spec.js:3:1 › the counter page has the expected title and visible buttons (707ms)
+  ✓   8 [phone] › e2e/page.spec.js:3:1 › the counter page has the expected title and visible buttons (497ms)
+  ✓   3 [desktop] › e2e/counter.spec.js:3:1 › the counter starts at 0 and adds one per tap (900ms)
+  ✓   1 [phone] › e2e/counter.spec.js:3:1 › the counter starts at 0 and adds one per tap (928ms)
+  ✓   4 [phone] › e2e/reset.spec.js:3:1 › reset returns the counter to 0 and counting resumes at 1 (1.0s)
+  ✓   5 [phone] › e2e/total.spec.js:3:1 › total taps counts every add and survives reset (941ms)
+  ✓  10 [desktop] › e2e/reset.spec.js:3:1 › reset returns the counter to 0 and counting resumes at 1 (818ms)
+  ✓   9 [desktop] › e2e/total.spec.js:3:1 › total taps counts every add and survives reset (837ms)
+  ✓   2 [desktop] › e2e/flag.spec.js:45:1 › with total taps off, the line is absent and Add and Reset work without errors (618ms)
+  ✓   7 [phone] › e2e/flag.spec.js:45:1 › with total taps off, the line is absent and Add and Reset work without errors (624ms)
+
+  10 passed (2.9s)
+EXIT_CODE=0
