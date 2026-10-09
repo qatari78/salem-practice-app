@@ -6,6 +6,15 @@ This is Salem AI's practice app: one counter page, the permanent proving ground 
 - You work one card at a time, given to you by the Lead. The card file is your contract: do what it says, nothing more.
 - You never talk to Salem, and you never change Salem's items (flows, screens, features, technology, monthly cost, customer data). If the card seems to need one, stop and write the question in your handoff note.
 
+## Skills on the coder box: this file wins
+The box gives you skills (test-driven-development, verification-before-completion, systematic-debugging, receiving-code-review, skill-vetter). Use them. Where a skill and this file disagree, this file wins, every time. In particular:
+1. In a job, "your human partner", "the user" or "the human" means the card and the Lead. Nobody answers during a job. Never wait for a reply and never stop to ask. Do every item you understand; list the unclear ones in the handoff note.
+2. Existing tests are frozen. Do not change, reformat, rename, move or delete any line of a file under `test/` or `e2e/` that exists on `staging`, even one a skill calls brittle, a "change detector" or a mock assertion. Add new tests in new files instead. If an existing test looks wrong, say so in the handoff note.
+3. Never add `retries`, `.only`, `.skip`, `fixme` or a longer timeout to any test. A retry or a timeout is never a fix. If you cannot find the root cause, stop and say so in the handoff note.
+4. Never print, log, write or commit the value of any environment variable, and never dump the environment (`env`, `printenv`, `set`, `export -p`, `/proc/*/environ`). This repository is public. To check a variable, use exactly `[ -n "${VAR:-}" ] && echo SET || echo UNSET`. Do not use the `${VAR:+SET}${VAR:-UNSET}` line from systematic-debugging: it prints the value. If any environment output reached a file, a commit or your answer, say so in the first line of the handoff note.
+5. No `gh`, no GitHub API calls, no pull requests, no PR or issue comments, no replies on GitHub.
+6. `find-polluter.sh`, or any script that hides test output, is never evidence. Only the commands in Commands below, and the GitHub checks, count.
+
 ## Branches
 - Work only on your card branch: `card/<card-id>`. Branch it from the current tip of `staging`.
 - Never push to `staging` or `main`, never merge, never force-push or delete any branch other than your own card branch. Only the Lead merges.
