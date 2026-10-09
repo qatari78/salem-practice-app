@@ -25,6 +25,12 @@ export const server = createServer(async (req, res) => {
     res.end('User-agent: *\nDisallow: /\n');
     return;
   }
+  const path = req.url?.split('?')[0];
+  if (path !== '/' && path !== '/index.html') {
+    res.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' });
+    res.end('Not found');
+    return;
+  }
   let html = await readFile(new URL('./public/index.html', import.meta.url), 'utf8');
   if (!featureTotalTaps) {
     html = html.replace('  <small id="total" data-testid="total">Total taps: 0</small>\n', '');
