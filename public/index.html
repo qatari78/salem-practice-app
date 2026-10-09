@@ -17,12 +17,17 @@
   <h1>Practice app</h1>
   <div id="count" data-testid="count">0</div>
   <button id="add" data-testid="add">Add one</button>
+  <button id="reset" data-testid="reset">Reset</button>
   <small>Environment: {{ENV}}</small>
 </main>
 <script>
   let n = 0;
   document.getElementById('add').addEventListener('click', () => {
     document.getElementById('count').textContent = String(++n);
+  });
+  document.getElementById('reset').addEventListener('click', () => {
+    n = 0;
+    document.getElementById('count').textContent = String(n);
   });
 </script>
 </body>
