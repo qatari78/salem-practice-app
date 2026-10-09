@@ -1,13 +1,22 @@
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
 
 const port = Number(process.env.PORT) || 3000;
 const env = process.env.RAILWAY_ENVIRONMENT_NAME || 'local';
+/** @type {{ version: string }} */
+const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8'));
+const commit = process.env.RAILWAY_GIT_COMMIT_SHA?.slice(0, 7) || 'local';
 
 export const server = createServer(async (req, res) => {
   if (req.url === '/health') {
     res.writeHead(200, { 'content-type': 'application/json' });
     res.end(JSON.stringify({ ok: true, env }));
+    return;
+  }
+  if (req.url === '/version') {
+    res.writeHead(200, { 'content-type': 'application/json' });
+    res.end(JSON.stringify({ version: pkg.version, commit, env }));
     return;
   }
   const html = await readFile(new URL('./public/index.html', import.meta.url), 'utf8');
