@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 
 const port = Number(process.env.PORT) || 3000;
 const env = process.env.RAILWAY_ENVIRONMENT_NAME || 'local';
+const featureTotalTaps = process.env.FEATURE_TOTAL_TAPS !== 'off';
 /** @type {{ version: string }} */
 const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8'));
 const commit = process.env.RAILWAY_GIT_COMMIT_SHA?.slice(0, 7) || 'local';
@@ -24,7 +25,10 @@ export const server = createServer(async (req, res) => {
     res.end('User-agent: *\nDisallow: /\n');
     return;
   }
-  const html = await readFile(new URL('./public/index.html', import.meta.url), 'utf8');
+  let html = await readFile(new URL('./public/index.html', import.meta.url), 'utf8');
+  if (!featureTotalTaps) {
+    html = html.replace('  <small id="total" data-testid="total">Total taps: 0</small>\n', '');
+  }
   res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
   res.end(html.replace('{{ENV}}', env));
 });

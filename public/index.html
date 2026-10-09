@@ -26,9 +26,11 @@
 <script>
   let n = 0;
   let total = 0;
+  const totalElement = document.getElementById('total');
   document.getElementById('add').addEventListener('click', () => {
     document.getElementById('count').textContent = String(++n);
-    document.getElementById('total').textContent = `Total taps: ${++total}`;
+    total++;
+    if (totalElement) totalElement.textContent = `Total taps: ${total}`;
   });
   document.getElementById('reset').addEventListener('click', () => {
     n = 0;
