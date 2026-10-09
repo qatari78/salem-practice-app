@@ -1,3 +1,16 @@
+# Fable segment (final reviewer) — started 2026-10-09 17:58 UTC
+
+Continuing from Astra's handoff (the "Next actions" item 5 below: next reviewer assesses the changed plan and the exact releases against the new evidence, then updates dispositions) and from the Lead's `review/DISPOSITION.md`. The previous segment stopped at commit `37994e7` after an allowance pause; the only change in that commit is the box's pause marker `SALEM-PAUSE-TEST.txt`, which is left untouched. Nothing of Astra's record is redone; Astra's sections are kept below unchanged except where marked "Fable:".
+
+Fable progress (updated section by section):
+- [x] Read `CHECKPOINT.md`; identified continuation point.
+- [ ] Read `FINDINGS.md`, `DISPOSITION.md`, `IMPROVEMENTS.md`, `EVIDENCE.md`, `INPUT.md`.
+- [ ] Read the originals: `server.js`, `public/index.html`, tests, `checks.yml`, `checks/*`, git log.
+- [ ] Own judgment on each of Astra's findings and on the Lead's answers; new findings (F-new-*).
+- [ ] Write `FINDINGS.md` dispositions, `SIGNOFF.md`, final checkpoint.
+
+---
+
 # Reviewed version
 
 Pilot plan v2, 9 Oct 2026, as supplied in the review request (sections A–D). Sections A–C are preserved in `review/INPUT.md`; no later plan revision was reviewed.
