@@ -60,6 +60,8 @@ export const server = createServer(async (req, res) => {
 });
 
 server.on('connect', (_req, socket) => {
+  // Node removes its HTTP socket error listener before emitting CONNECT.
+  socket.on('error', () => socket.destroy());
   const body = 'Method not allowed';
   socket.end(
     'HTTP/1.1 405 Method Not Allowed\r\n' +
