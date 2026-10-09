@@ -10,6 +10,14 @@ const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 
 const commit = process.env.RAILWAY_GIT_COMMIT_SHA?.slice(0, 7) || 'local';
 
 export const server = createServer(async (req, res) => {
+  if (req.method !== 'GET' && req.method !== 'HEAD') {
+    res.writeHead(405, {
+      Allow: 'GET, HEAD',
+      'content-type': 'text/plain; charset=utf-8',
+    });
+    res.end('Method not allowed');
+    return;
+  }
   if (req.url === '/health') {
     res.writeHead(200, { 'content-type': 'application/json' });
     res.end(JSON.stringify({ ok: true, env }));
