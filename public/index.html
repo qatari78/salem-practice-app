@@ -11,20 +11,24 @@
   #count { font-size: 4rem; font-weight: 700; margin: .5rem 0 1rem; }
   button { font-size: 1.25rem; padding: .75rem 2rem; border: 0; border-radius: .5rem; background: #1c2541; color: #fff; }
   small { display: block; margin-top: 1.5rem; color: #777; }
+  #total { margin: 0 0 1rem; }
 </style>
 </head>
 <body>
 <main>
   <h1>Practice app</h1>
   <div id="count" data-testid="count">0</div>
+  <small id="total" data-testid="total">Total taps: 0</small>
   <button id="add" data-testid="add">Add one</button>
   <button id="reset" data-testid="reset">Reset</button>
   <small>Environment: {{ENV}}</small>
 </main>
 <script>
   let n = 0;
+  let total = 0;
   document.getElementById('add').addEventListener('click', () => {
     document.getElementById('count').textContent = String(++n);
+    document.getElementById('total').textContent = `Total taps: ${++total}`;
   });
   document.getElementById('reset').addEventListener('click', () => {
     n = 0;
