@@ -1,15 +1,45 @@
-# Fable segment (final reviewer) — started 2026-10-09 17:58 UTC
+# Fable segment (final reviewer) — 2026-10-09, started 17:58 UTC
 
-Continuing from Astra's handoff (the "Next actions" item 5 below: next reviewer assesses the changed plan and the exact releases against the new evidence, then updates dispositions) and from the Lead's `review/DISPOSITION.md`. The previous segment stopped at commit `37994e7` after an allowance pause; the only change in that commit is the box's pause marker `SALEM-PAUSE-TEST.txt`, which is left untouched. Nothing of Astra's record is redone; Astra's sections are kept below unchanged except where marked "Fable:".
+Continuing from Astra's handoff ("Next actions" item 5 below) and the Lead's `review/DISPOSITION.md`. The previous segment stopped at commit `37994e7` after an allowance pause; that commit only added the box's pause marker `SALEM-PAUSE-TEST.txt`, left untouched. Astra's record below is kept unchanged; Fable's state is in this section.
 
-Fable progress (updated section by section):
+## Reviewed version (Fable)
+
+Pilot plan v2 (9 Oct 2026) as transcribed in `review/INPUT.md`; application at staging tip `f96a8a2241fb0b8eabae2b0d4feaeba2c6799f1b` (byte-identical on this branch: `git diff --stat f96a8a2 HEAD -- . ':!review'` lists only the pause marker). Switch commit `4825cc2`, baseline `187b890`. No plan v3 text exists.
+
+## Evidence accessed (Fable)
+
+All review files and retained logs under `review/`; `AGENTS.md`; `server.js`; `public/index.html`; `package.json`; `test/flag.test.js`; `test/version.test.js`; all `e2e/*.spec.js`; `.github/workflows/checks.yml` and `checks/*`; git refs and history; diffs `187b890..4825cc2` (server.js, public/index.html); `187b890:server.js` and `:public/index.html`; history search for marker or rollback commits (none found). One web search on Railway docs (Variables Reference; Deployment Actions): provided variables are available during the build; rollback restores the image and custom variables without rebuilding. Nothing outside the repository read; no hosting, GitHub or staging access.
+
+## Checks run (Fable)
+
+None re-run. Astra's six checks at the same application commit are retained in `review/logs/` (all `EXIT_CODE=0`; unit 50/50; browser 10/10 on phone and desktop). No Fable finding depends on a different check result; the new findings come from code reading (server.js:52 literal-line coupling; /version key set fixed by test/version.test.js:19; rule 4 scope) and from the plan text (production inventory not checked).
+
+## Unresolved questions (Fable)
+
+Astra's ER1–ER8 stand as the Lead answered them: ER1 and ER2 originals do not exist (ids not recorded; bodies not kept); ER3, ER5, ER6 originals not supplied; ER7 and ER8 routed to Salem. None can be settled from this repository; none needs to be, because plan v3 and one recorded drill produce fresh evidence. Open owner decisions: R3, R7, R8, R9 (see `SIGNOFF.md` "For Salem").
+
+## Next actions (Fable)
+
+1. Lead: write plan v3 with the MUST set in `SIGNOFF.md` (explicit on/off and apply operation; whole-drill freeze, window, recovery target, fail-stop; ledger and outside observations; boundary sentence).
+2. Lead: card for the build-time release manifest (R2) within AGENTS.md rule 4 (F-new-4); optional `/release` route (F-new-3); Railway build command change is the Lead's.
+3. Lead: run the drill once under v3 with the ledger and the Playwright run against the staging URL on both profiles (R5), production inventory before and after (F-new-2).
+4. Salem, through the Lead: decide R3, R7, R8, R9.
+5. Next reviewer: review plan v3 and the manifest card at their exact commits against the acceptance tests in `SIGNOFF.md`.
+
+## Verdict so far (Fable)
+
+**CHANGES REQUIRED.** MUST findings R1, R2, R4, R5, R6 stand with known, Lead-accepted remedies; R3, R7, R8, R9 are FOR SALEM; F-new-1 to F-new-4 are non-blocking SHOULD items. The code is sound for its purpose; the plan and its evidence are not yet sufficient to call the two levers proven. Full reasoning and the acceptance tests are in `review/SIGNOFF.md`; final dispositions in `review/FINDINGS.md`.
+
+Fable progress:
 - [x] Read `CHECKPOINT.md`; identified continuation point.
-- [ ] Read `FINDINGS.md`, `DISPOSITION.md`, `IMPROVEMENTS.md`, `EVIDENCE.md`, `INPUT.md`.
-- [ ] Read the originals: `server.js`, `public/index.html`, tests, `checks.yml`, `checks/*`, git log.
-- [ ] Own judgment on each of Astra's findings and on the Lead's answers; new findings (F-new-*).
-- [ ] Write `FINDINGS.md` dispositions, `SIGNOFF.md`, final checkpoint.
+- [x] Read `FINDINGS.md`, `DISPOSITION.md`, `IMPROVEMENTS.md`, `EVIDENCE.md`, `INPUT.md`.
+- [x] Read the originals: `server.js`, `public/index.html`, tests, `checks.yml`, `checks/*`, git log.
+- [x] Own judgment on each of Astra's findings and on the Lead's answers; new findings F-new-1..4.
+- [x] Wrote `FINDINGS.md` dispositions, `SIGNOFF.md`, this checkpoint. Final answer to follow; if the box stops before it, these three files are the complete record.
 
 ---
+
+# Astra segment (first reviewer) — kept unchanged below
 
 # Reviewed version
 
