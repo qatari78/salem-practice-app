@@ -19,6 +19,11 @@ export const server = createServer(async (req, res) => {
     res.end(JSON.stringify({ version: pkg.version, commit, env }));
     return;
   }
+  if (req.url === '/robots.txt') {
+    res.writeHead(200, { 'content-type': 'text/plain; charset=utf-8' });
+    res.end('User-agent: *\nDisallow: /\n');
+    return;
+  }
   const html = await readFile(new URL('./public/index.html', import.meta.url), 'utf8');
   res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
   res.end(html.replace('{{ENV}}', env));
