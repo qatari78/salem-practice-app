@@ -1,0 +1,2 @@
+A test note inside a folder.
+Second line.
