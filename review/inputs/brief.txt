@@ -1,0 +1,1 @@
+Brief for the pause test: one attachment, so review/ exists before the pause hook writes to it.
