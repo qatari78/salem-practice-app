@@ -4,5 +4,5 @@ Done:
 - Read server.js and the CONNECT, HEAD and notfound tests; unit tests 50/50 pass
 - One issue found and checked by running the server (query string on /health and /version gives 404)
 - FINDINGS.md written (verdict CHANGES REQUIRED, minor)
-Next:
-- Commit and push review/ to review/test-live-1011-sonnet-pause2, then finish
+Next: nothing, review finished.
+- Committed and pushed review/ to review/test-live-1011-sonnet-pause2
